@@ -1,15 +1,14 @@
 const facts = [
   "Water can boil and freeze at the same time!",
   "Bananas are slightly radioactive 🍌",
-  "There’s enough DNA in your body to stretch to the sun and back 17 times!",
+  "There's enough DNA in your body to stretch to the sun and back 17 times!",
   "Octopuses have three hearts 🐙",
   "Honey never spoils — 3,000-year-old honey is still edible!",
   "Some metals explode on contact with water 💥",
   "Neutron stars are so dense, a teaspoon would weigh 6 billion tons!",
   "Sharks existed before trees 🌳",
   "A day on Venus is longer than a year on Venus.",
-  "The human brain uses about 20 watts of power – enough to light a dim bulb!",
-  // memes
+  "The human brain uses about 20 watts — enough to light a dim bulb 💡",
   "Science meme checkpoint 1 🔬",
   "Science meme checkpoint 2 🧪",
   "Science meme checkpoint 3 ⚛️",
@@ -35,7 +34,7 @@ function updateFact() {
     // Rickroll time!
     document.body.innerHTML = `
       <div style="text-align:center;padding:30px;color:white;">
-        <h1>🎵 Never gonna give you up... 🎶</h1>
+        <h1 class="neon-pink">🎵 Never gonna give you up... 🎶</h1>
         <iframe width="560" height="315"
           src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0"
           frameborder="0" allow="autoplay; encrypted-media"
@@ -45,7 +44,6 @@ function updateFact() {
   }
 
   factBox.textContent = facts[factIndex];
-
   if (memes[factIndex * 10]) {
     memeImg.src = memes[factIndex * 10];
     memeImg.style.display = "block";
@@ -56,5 +54,5 @@ function updateFact() {
 
 document.getElementById("doNotClick").addEventListener("click", () => {
   updateFact();
-  setInterval(updateFact, 3000);
+  setInterval(updateFact, 3500);
 });
