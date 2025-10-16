@@ -88,7 +88,7 @@ function showNextFact() {
       memeBox.appendChild(img);
 
       // keep meme for 5 seconds
-      setTimeout(() => { memeBox.innerHTML = ""; }, 15000);
+      setTimeout(() => { memeBox.innerHTML = ""; }, 20000);
     }
 
     factIndex++;
