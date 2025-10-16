@@ -1,67 +1,3 @@
-// Canvas for mouse trails
-const canvas = document.createElement('canvas');
-canvas.id='trailCanvas';
-document.body.appendChild(canvas);
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-window.addEventListener('resize', ()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-// Mouse tracking
-let mouse = {x:canvas.width/2, y:canvas.height/2};
-window.addEventListener('mousemove', (e)=>{
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-// Particle class
-let particles=[];
-class Particle {
-  constructor(x,y,color){
-    this.x=x; this.y=y;
-    this.color=color;
-    this.size=Math.random()*4+2;
-    this.alpha=1;
-    this.vx=(Math.random()-0.5)*1;
-    this.vy=(Math.random()-0.5)*1;
-  }
-  update(){
-    this.x += this.vx + (mouse.x-this.x)*0.02;
-    this.y += this.vy + (mouse.y-this.y)*0.02;
-    this.alpha-=0.02;
-  }
-  draw(){
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-    ctx.fillStyle=`rgba(${this.color.r},${this.color.g},${this.color.b},${this.alpha})`;
-    ctx.fill();
-  }
-}
-
-// Neon color helper
-function neonColor(){
-  const colors = [{r:0,g:240,b:255},{r:191,g:0,b:255},{r:255,g:0,b:234}];
-  return colors[Math.floor(Math.random()*colors.length)];
-}
-
-// Animate trails
-function animateTrails(){
-  ctx.fillStyle='rgba(0,0,0,0.1)';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  for(let i=0;i<2;i++) particles.push(new Particle(mouse.x,mouse.y, neonColor()));
-  for(let i=particles.length-1;i>=0;i--){
-    particles[i].update();
-    particles[i].draw();
-    if(particles[i].alpha<=0) particles.splice(i,1);
-  }
-  requestAnimationFrame(animateTrails);
-}
-animateTrails();
-
 // --- Floating orbs ---
 const orbsContainer = document.getElementById('orbsContainer');
 for(let i=0;i<20;i++){
@@ -82,19 +18,61 @@ const factText = document.getElementById('factText');
 const embedWrap = document.getElementById('embedWrap');
 const fallback = document.getElementById('fallback');
 
+// 50 facts, 5 memes at 10,20,30,40,50
 const facts = [
   {type:"text", content:"Water can boil and freeze at the same time."},
   {type:"text", content:"Bananas are berries, but strawberries aren't."},
-  // ... other text facts ...
-  {type:"meme", content:"meme1.png"}, // fact 10
-  // ... more text ...
-  {type:"meme", content:"meme2.png"}, // fact 20
-  {type:"meme", content:"meme3.png"}, // fact 30
-  {type:"meme", content:"meme4.png"}, // fact 40
-  {type:"meme", content:"meme5.png"}  // fact 50
+  {type:"text", content:"Octopuses have three hearts."},
+  {type:"text", content:"Honey never spoils."},
+  {type:"text", content:"Sharks existed before trees."},
+  {type:"text", content:"Some turtles breathe through their butts."},
+  {type:"text", content:"There are more stars in the universe than grains of sand on Earth."},
+  {type:"text", content:"Sloths can hold their breath longer than dolphins."},
+  {type:"text", content:"Your stomach gets a new lining every 3-4 days."},
+  {type:"meme", content:"meme1.png"}, // 10
+  {type:"text", content:"Wombat poop is cube-shaped."},
+  {type:"text", content:"Butterflies can taste with their feet."},
+  {type:"text", content:"Sea otters hold hands while sleeping."},
+  {type:"text", content:"A day on Venus is longer than a year on Venus."},
+  {type:"text", content:"The Eiffel Tower can be 15 cm taller during summer."},
+  {type:"text", content:"Sloths can rotate their heads almost 360 degrees."},
+  {type:"text", content:"Some mushrooms create zombies of ants."},
+  {type:"text", content:"Water can exist in all three states at once in a Tristate Point."},
+  {type:"text", content:"Your body has enough iron to make a nail."},
+  {type:"meme", content:"meme2.png"}, // 20
+  {type:"text", content:"Sharks can live up to 500 years."},
+  {type:"text", content:"Venus spins backward compared to other planets."},
+  {type:"text", content:"Sea cucumbers fight by shooting their guts out."},
+  {type:"text", content:"Butterflies can see red, green, blue, and ultraviolet."},
+  {type:"text", content:"The moon has moonquakes."},
+  {type:"text", content:"There are more bacteria in your mouth than people on Earth."},
+  {type:"text", content:"Sloths can hold their own body weight with their mouth."},
+  {type:"text", content:"The fingerprints of a koala are almost identical to humans."},
+  {type:"text", content:"Bananas glow blue under blacklight."},
+  {type:"meme", content:"meme3.png"}, // 30
+  {type:"text", content:"Sharks can detect one drop of blood in 25 gallons of water."},
+  {type:"text", content:"Rats laugh when tickled."},
+  {type:"text", content:"A jiffy is an actual unit of time: 1/100th of a second."},
+  {type:"text", content:"Some turtles can breathe through their butts."},
+  {type:"text", content:"Penguins propose with pebbles."},
+  {type:"text", content:"Otters have favorite rocks."},
+  {type:"text", content:"Your body has more bacterial cells than human cells."},
+  {type:"text", content:"Sharks existed before trees."},
+  {type:"text", content:"There’s a species of jellyfish that is immortal."},
+  {type:"meme", content:"meme4.png"}, // 40
+  {type:"text", content:"Lightning strikes Earth 8 million times per day."},
+  {type:"text", content:"The heart of a shrimp is located in its head."},
+  {type:"text", content:"Sloths can move faster in water than on land."},
+  {type:"text", content:"Pineapples take about 2 years to grow."},
+  {type:"text", content:"The oldest living tree is over 5,000 years old."},
+  {type:"text", content:"Some frogs can freeze completely and come back to life."},
+  {type:"text", content:"The human nose can remember 50,000 different scents."},
+  {type:"text", content:"Sharks have been around for 400 million years."},
+  {type:"meme", content:"meme5.png"}  // 50
 ];
 
 let currentFact = 0;
+
 function showNextFact(){
   if(currentFact < facts.length){
     factText.classList.remove('showFact');
