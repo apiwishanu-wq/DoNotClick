@@ -66,13 +66,13 @@ const memeBox = document.getElementById('memeBox');
 
 // Start facts when button clicked
 btn.addEventListener('click', () => {
-  btn.disabled = true;  // prevent double-click
+  btn.disabled = true;  
   startFacts();
 });
 
 function startFacts() {
-  showNextFact(); // show first fact immediately
-  factInterval = setInterval(showNextFact, 3000); // facts every 3 sec
+  showNextFact();
+  factInterval = setInterval(showNextFact, 3000);
 }
 
 function showNextFact() {
@@ -82,12 +82,13 @@ function showNextFact() {
 
     const num = factIndex + 1;
     if (memeImages[num]) {
-      setTimeout(() => {
-        const img = document.createElement('img');
-        img.src = memeImages[num];
-        img.alt = `Science Meme ${num / 10}`;
-        memeBox.appendChild(img);
-      }, 5000); // meme appears 5 sec after fact
+      const img = document.createElement('img');
+      img.src = memeImages[num];
+      img.alt = `Science Meme ${num / 10}`;
+      memeBox.appendChild(img);
+
+      // keep meme for 5 seconds
+      setTimeout(() => { memeBox.innerHTML = ""; }, 5000);
     }
 
     factIndex++;
@@ -116,4 +117,14 @@ function startCaptchaPrank() {
       </div>
     `;
   });
+}
+
+// --- Floating Orbs ---
+for(let i=0; i<10; i++){
+  const orb = document.createElement('div');
+  orb.classList.add('orb');
+  orb.style.left = Math.random()*100 + 'vw';
+  orb.style.width = orb.style.height = (20+Math.random()*40)+'px';
+  orb.style.animationDuration = (5+Math.random()*10)+'s';
+  document.querySelector('.orbs').appendChild(orb);
 }
