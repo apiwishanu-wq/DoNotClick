@@ -1,204 +1,88 @@
-* {
-  box-sizing: border-box;
+body {
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at top, #0a0016, #000);
-  color: #fff;
-  overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
-}
-
-/* Orbs */
-#orbsContainer {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
   overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at 30% 30%, #10001f, #000);
+  color: white;
+  height: 100vh;
 }
 
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.3;
-  filter: blur(60px);
-  animation: floatOrb infinite ease-in-out alternate;
+/* --- Glassmorphism --- */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.2);
+  padding: 2rem;
 }
 
-@keyframes floatOrb {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100px) translateX(50px); }
-}
-
-/* Center section */
+/* --- Center content --- */
 .center {
   position: fixed;
   inset: 0;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   gap: 1rem;
+  z-index: 2;
   padding: 1rem;
 }
-@media (max-height: 600px) {
-  .center h1 { font-size: 2em; }
-  .center p { font-size: 1em; }
-  .neon-btn { padding: 10px 25px; font-size: 1em; }
-}
 
-
-h1 {
-  font-size: 2.5em;
-  color: #00f0ff;
-  text-shadow: 0 0 20px #00f0ff;
-  margin-bottom: 10px;
-}
-
-p {
-  font-size: 1.1em;
-  color: #ccc;
-  margin-bottom: 20px;
-}
-
-/* Neon button */
+/* --- Neon button --- */
 .neon-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid #bf00ff;
-  border-radius: 12px;
-  padding: 15px 40px;
-  color: #ff00ea;
-  font-size: 1.2em;
+  background: linear-gradient(90deg, #00f0ff, #bf00ff, #ff00ea);
+  background-size: 200%;
+  border: none;
+  color: white;
+  font-size: 1.4em;
+  padding: 15px 35px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 15px #bf00ff;
+  transition: 0.4s;
+  box-shadow: 0 0 15px #00f0ff;
 }
 
 .neon-btn:hover {
-  background: #bf00ff;
-  color: #fff;
+  background-position: right;
+  transform: scale(1.05);
   box-shadow: 0 0 25px #ff00ea;
 }
 
-/* Modal */
-#modal[aria-hidden="false"] {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 3;
+/* --- Fact box --- */
+#factBox {
+  margin-top: 1.5rem;
+  font-size: 1.2em;
+  color: #bdfcff;
 }
 
-.glass-box {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255,255,255,0.3);
-  backdrop-filter: blur(20px);
-  padding: 30px;
-  border-radius: 20px;
-  width: 80%;
-  max-width: 600px;
-  text-align: center;
-  box-shadow: 0 0 25px rgba(191,0,255,0.3);
-  color: #fff;
+/* --- Floating Orbs --- */
+.orbs::before, .orbs::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff00ea33, transparent);
+  animation: float 8s infinite ease-in-out;
 }
 
-#factText {
-  font-size: 1.3em;
-  margin: 20px 0;
-  min-height: 60px;
-  color: #00f0ff;
-  text-shadow: 0 0 8px #00f0ff;
-  transition: opacity 0.5s ease;
+.orbs::after {
+  left: 60%;
+  top: 20%;
+  background: radial-gradient(circle, #00f0ff33, transparent);
+  animation-delay: 3s;
 }
 
-#memeWrap img {
-  max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 0 20px #ff00ea;
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.1); }
 }
 
-#progressCounter {
-  margin-top: 10px;
-  color: #ff00ea;
-  font-weight: bold;
-}
-
-#progressBar {
-  background: rgba(255,255,255,0.1);
-  border-radius: 10px;
-  height: 10px;
-  margin-top: 8px;
-  overflow: hidden;
-}
-
-#bar {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #00f0ff, #ff00ea);
-  transition: width 0.3s linear;
-}
-
-/* Captcha */
-.hidden { display: none; }
-
-#captchaOverlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.6);
-  z-index: 5;
-}
-
-.captcha #captchaGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.captcha .cell {
-  width: 80px;
-  height: 80px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid #ff00ea;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.captcha .cell:hover {
-  background: #ff00ea;
-  box-shadow: 0 0 20px #ff00ea;
-}
-
-/* Result area */
-#resultArea {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 6;
-  background: rgba(0,0,0,0.6);
-}
-
-#embedWrap iframe {
-  width: 560px;
-  height: 315px;
-  border-radius: 16px;
-  box-shadow: 0 0 30px #00f0ff;
-}
-
-#fallback p {
-  color: #ff00ea;
-  margin-bottom: 10px;
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .neon-btn { font-size: 1em; padding: 12px 25px; }
 }
