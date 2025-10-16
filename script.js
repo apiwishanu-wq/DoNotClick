@@ -50,19 +50,36 @@ const facts = [
   "🧬 Science Meme #5: 'Genetics: copy-paste, but sometimes with typos.'"
 ];
 
+const memeImages = {
+  10: "meme1.png",
+  20: "meme2.png",
+  30: "meme3.png",
+  40: "meme4.png",
+  50: "meme5.png"
+};
+
 let factIndex = 0;
 const btn = document.getElementById('clickBtn');
 const factBox = document.getElementById('factBox');
+const memeBox = document.getElementById('memeBox');
 
 btn.addEventListener('click', showNextFact);
 
 function showNextFact() {
   if (factIndex < facts.length) {
     factBox.innerHTML = facts[factIndex];
-    factIndex++;
-
-    // Scroll memes with a bit of glow fun
+    memeBox.innerHTML = ""; // Clear previous meme
     factBox.style.textShadow = "0 0 15px #00f0ff";
+
+    const num = factIndex + 1;
+    if (memeImages[num]) {
+      const img = document.createElement('img');
+      img.src = memeImages[num];
+      img.alt = `Science Meme ${num / 10}`;
+      memeBox.appendChild(img);
+    }
+
+    factIndex++;
   } else {
     startCaptchaPrank();
   }
@@ -78,7 +95,6 @@ function startCaptchaPrank() {
   `;
   const verify = document.getElementById("verifyBtn");
   verify.addEventListener("click", () => {
-    // Final Rickroll page
     document.body.innerHTML = `
       <div class="center glass">
         <h1>🎉 Surprise!</h1>
