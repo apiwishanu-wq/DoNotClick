@@ -102,7 +102,6 @@ function startCaptchaPrank() {
   document.body.innerHTML = `
   <div class="center glass">
     <h1>🤖 Verify you're not a bot!</h1>
-    <p>Click all squares with Rick Astley</p>
     <button class="neon-btn" id="verifyBtn">Verify</button>
   </div>
   `;
