@@ -1,47 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Do Not Click!</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚠️ Do Not Click ⚠️</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="orbsContainer"></div>
+  <div class="orbs"></div>
 
-  <div class="center">
+  <div class="center glass">
     <h1>⚠️ Do Not Click ⚠️</h1>
-    <p>You’ve been warned... but curiosity is a science experiment!</p>
-    <button id="startBtn" class="neon-btn">DO NOT CLICK</button>
-  </div>
-
-  <div id="modal" aria-hidden="true">
-    <div class="glass-box">
-      <h2>🔬 Science Facts Sequence</h2>
-      <div id="factText"></div>
-      <div id="memeWrap"></div>
-      <div id="progressCounter">Fact 0 / 50</div>
-      <div id="progressBar"><div id="bar"></div></div>
-    </div>
-  </div>
-
-  <div id="captchaOverlay" class="hidden">
-    <div class="glass-box captcha">
-      <h2>🤖 CAPTCHA</h2>
-      <p>Prove you're not a robot scientist!</p>
-      <div id="captchaGrid"></div>
-    </div>
-  </div>
-
-  <div id="resultArea" class="hidden">
-    <div class="glass-box">
-      <h2>🎉 Surprise!</h2>
-      <div id="embedWrap"></div>
-      <div id="fallback" class="hidden">
-        <p>You’re about to get Rickrolled! (but your browser blocked the embed)</p>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="neon-btn">Open Manually</a>
-      </div>
-    </div>
+    <p>Seriously, it’s for science... not curiosity.</p>
+    <button class="neon-btn" id="clickBtn">Do Not Click</button>
+    <div id="factBox"></div>
   </div>
 
   <script src="script.js"></script>
