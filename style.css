@@ -1,111 +1,83 @@
-body {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top, #1a002b, #000);
-  color: white;
-  overflow: hidden;
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Neon glass base */
+:root{
+  --bg1:#050418;
+  --accent-cyan:#00f0ff;
+  --accent-purple:#bf00ff;
+  --accent-pink:#ff00ea;
+  --muted:#98b7d9;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+body{
+  background: radial-gradient(1200px 800px at 10% 10%, rgba(0,240,255,0.06), transparent),
+              radial-gradient(800px 600px at 90% 80%, rgba(191,0,255,0.05), transparent),
+              var(--bg1);
+  color:#eaf4ff;
+  overflow:hidden;
 }
 
-.container {
-  text-align: center;
-  padding: 2rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+/* Orbs */
+#orbsContainer{position:fixed;inset:0;pointer-events:none;z-index:0}
+.orb{
+  position:absolute;border-radius:50%;opacity:0.35;mix-blend-mode:screen;filter:blur(18px);
+  animation: drift linear infinite;
 }
+@keyframes drift{0%{transform:translateY(0)}50%{transform:translateY(-40px)}100%{transform:translateY(0)}}
 
-button {
-  margin-top: 20px;
-  padding: 15px 40px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1.2em;
-  color: white;
-  background: linear-gradient(45deg, #00f0ff, #bf00ff, #ff00ea);
-  cursor: pointer;
-  transition: 0.3s;
+/* center card */
+.card-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;z-index:2;position:relative}
+.card{
+  width:min(760px,92%);max-width:760px;padding:36px;border-radius:16px;background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.04);
+  box-shadow:0 18px 50px rgba(2,6,23,0.7);
+  text-align:center;
 }
+h1{font-size:clamp(20px,4vw,36px);color:var(--accent-cyan);margin:0 0 8px}
+.subtitle{color:var(--muted);margin:0 0 18px}
+.primary{background:linear-gradient(90deg,var(--accent-purple),var(--accent-pink));border:0;padding:14px 22px;border-radius:12px;color:#031226;font-weight:700;cursor:pointer;box-shadow:0 12px 30px rgba(191,0,255,0.12)}
+.primary:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(191,0,255,0.2)}
+.hint{color:var(--muted);margin-top:12px;font-size:14px}
 
-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #ff00ea;
+/* modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:5;pointer-events:none}
+.modal-card{
+  width:min(820px,94%);max-width:820px;padding:20px;border-radius:14px;background:rgba(10,12,20,0.8);
+  border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(10px);text-align:left;pointer-events:auto;
+  box-shadow:0 30px 80px rgba(2,6,23,0.75);
+  opacity:0;transform:translateY(6px);transition:all .45s ease;
 }
+.modal[aria-hidden="false"] .modal-card{opacity:1;transform:none}
+.modal-title{margin:0;color:var(--accent-pink);font-size:18px}
 
-.orbs::before, .orbs::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  animation: float 8s ease-in-out infinite;
-}
+/* fact area */
+.fact-area{display:flex;gap:18px;align-items:center}
+.fact-text{flex:1}
+.fact-text .text{font-size:18px;color:var(--accent-purple);min-height:60px;opacity:0;transition:opacity .6s}
+.fact-text .text.show{opacity:1}
+.meme-wrap{width:320px;max-width:38%;display:flex;align-items:center;justify-content:center}
+.meme-wrap img{width:100%;border-radius:10px;box-shadow:0 10px 40px rgba(191,0,255,0.12);display:block}
 
-.orbs::before {
-  width: 300px;
-  height: 300px;
-  background: #00f0ff;
-  top: 10%;
-  left: 15%;
-}
+/* progress */
+.progress-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.counter{color:var(--muted);font-weight:700}
+.progressbar{flex:1;height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent-cyan),var(--accent-pink));transition:width .3s linear}
 
-.orbs::after {
-  width: 400px;
-  height: 400px;
-  background: #bf00ff;
-  bottom: 10%;
-  right: 10%;
-  animation-delay: 4s;
-}
+/* captcha overlay */
+.overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9}
+.hidden{display:none}
+.captcha-card{background:linear-gradient(180deg,rgba(20,6,30,0.95),rgba(8,2,18,0.95));padding:22px;border-radius:12px;border:1px solid rgba(191,0,255,0.08);box-shadow:0 24px 60px rgba(2,6,23,0.8);text-align:center}
+.captcha-card h3{margin:0;color:var(--accent-cyan)}
+.captcha-instr{color:var(--muted);margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(3,110px);grid-gap:12px;margin-top:18px;justify-content:center}
+.grid .cell{width:110px;height:110px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.04);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.grid .cell:hover{background:rgba(255,255,255,0.06)}
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
+/* result area */
+.result{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:7}
+.result-card{background:rgba(6,8,14,0.95);padding:20px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);width:min(820px,90%);text-align:center}
+.result-card iframe{width:100%;height:360px;border-radius:8px;border:0}
+.fallback img{max-width:100%;border-radius:8px}
 
-.hidden {
-  display: none;
-}
-
-.meme {
-  margin-top: 20px;
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #ff00ea;
-}
-
-#captcha {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(30, 0, 50, 0.8);
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 0 30px #bf00ff;
-  text-align: center;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-gap: 10px;
-  margin-top: 20px;
-}
-
-.grid div {
-  width: 100px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid #555;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.grid div:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
+/* responsive */
+@media (max-widt
