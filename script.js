@@ -8,7 +8,7 @@ const facts = [
   "The Eiffel Tower grows taller in summer due to heat expansion.",
   "Venus spins backward compared to most planets.",
   "Sharks existed before trees.",
-  "🧪 Science Meme #1 ",
+  "🧪 Science Meme #1: 'Trust me bro, it's peer reviewed.'",
   "A day on Venus is longer than its year.",
   "Hot water freezes faster than cold water (Mpemba effect).",
   "Diamonds can rain on Jupiter and Saturn.",
@@ -18,7 +18,7 @@ const facts = [
   "Sound travels faster in water than in air.",
   "There are more trees on Earth than stars in the Milky Way.",
   "The tongue is the strongest muscle by size.",
-  "🧠 Science Meme #2 ",
+  "🧠 Science Meme #2: 'Chemistry is just cooking but the dinner might explode.'",
   "Some metals explode when they touch water (hello, sodium!).",
   "There’s enough DNA in your body to stretch from the Sun to Pluto and back.",
   "Black holes don’t suck — they warp spacetime.",
@@ -28,7 +28,7 @@ const facts = [
   "You can’t burp in space (no gravity, no separation).",
   "Jellyfish are biologically immortal… kind of.",
   "Your brain has more connections than there are stars.",
-  "🚀 Science Meme #3 ",
+  "🚀 Science Meme #3: 'Astronomy — where space is literally our field.'",
   "Butterflies taste with their feet.",
   "The smallest bone is in your ear.",
   "Your bones are 5 times stronger than steel (per weight).",
@@ -38,7 +38,7 @@ const facts = [
   "Some turtles can breathe through their butts. Yup.",
   "Pluto has five moons and major identity issues.",
   "The universe is expanding faster than the speed of light (kinda).",
-  "☄️ Science Meme #4 ",
+  "☄️ Science Meme #4: 'Big Bang Theory: basically one loud science experiment.'",
   "The longest hiccup lasted 68 years.",
   "Cows have best friends.",
   "Your heart can synchronize to music.",
@@ -47,7 +47,7 @@ const facts = [
   "A bolt of lightning is 5x hotter than the Sun.",
   "Humans glow in the dark, just too faint to see.",
   "Time passes faster at your head than at your feet.",
-  "🧬 Science Meme #5 "
+  "🧬 Science Meme #5: 'Genetics: copy-paste, but sometimes with typos.'"
 ];
 
 const memeImages = {
@@ -59,19 +59,27 @@ const memeImages = {
 };
 
 let factIndex = 0;
+let factInterval;
+const btn = document.getElementById('clickBtn');
 const factBox = document.getElementById('factBox');
 const memeBox = document.getElementById('memeBox');
 
-// Disable manual clicking
-document.getElementById('clickBtn').style.display = "none";
+// Start facts when button clicked
+btn.addEventListener('click', () => {
+  btn.disabled = true;  // prevent double-click
+  startFacts();
+});
 
-// Function to show next fact
+function startFacts() {
+  showNextFact(); // show first fact immediately
+  factInterval = setInterval(showNextFact, 3000); // every 3 sec
+}
+
 function showNextFact() {
   if (factIndex < facts.length) {
     factBox.innerHTML = facts[factIndex];
     memeBox.innerHTML = "";
 
-    // Check if this fact has a meme
     const num = factIndex + 1;
     if (memeImages[num]) {
       setTimeout(() => {
@@ -79,7 +87,7 @@ function showNextFact() {
         img.src = memeImages[num];
         img.alt = `Science Meme ${num / 10}`;
         memeBox.appendChild(img);
-      }, 3000); // meme shows after 3 sec of the fact
+      }, 5000); // meme shows 5 sec after fact
     }
 
     factIndex++;
@@ -89,13 +97,6 @@ function showNextFact() {
   }
 }
 
-// Auto cycle facts every 3 seconds
-const factInterval = setInterval(showNextFact, 3000);
-
-// Start first fact immediately
-showNextFact();
-
-// --- CAPTCHA prank at the end ---
 function startCaptchaPrank() {
   document.body.innerHTML = `
   <div class="center glass">
