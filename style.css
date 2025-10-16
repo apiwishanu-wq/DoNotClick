@@ -1,7 +1,8 @@
+/* General layout */
 body {
   margin: 0;
   height: 100vh;
-  background: radial-gradient(circle at top left, #110022, #000);
+  background: radial-gradient(circle at top left, #0a0018, #000);
   overflow: hidden;
   font-family: 'Poppins', sans-serif;
   color: white;
@@ -10,48 +11,91 @@ body {
   align-items: center;
 }
 
+/* Floating Orbs */
+.orb {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+  animation: float 8s ease-in-out infinite alternate;
+}
+.orb1 { background: #00f0ff55; top: 10%; left: 10%; animation-delay: 0s; }
+.orb2 { background: #bf00ff55; bottom: 15%; right: 15%; animation-delay: 3s; }
+.orb3 { background: #ff00ea55; top: 50%; left: 70%; animation-delay: 5s; }
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-40px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Glassmorphism effect */
+.glass {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Container */
 .container {
+  padding: 40px;
   text-align: center;
   z-index: 2;
-  position: relative;
+  width: 90%;
+  max-width: 600px;
 }
 
+/* Typography */
 h1 {
-  font-size: 3rem;
-  color: #ff0055;
-  text-shadow: 0 0 15px #ff0055;
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
 }
-
 .warning {
   font-size: 1.2rem;
-  margin-bottom: 20px;
-  opacity: 0.8;
+  margin-bottom: 30px;
+  opacity: 0.85;
 }
 
+/* Neon colors */
+.neon-cyan { color: #00f0ff; text-shadow: 0 0 15px #00f0ff; }
+.neon-purple { color: #bf00ff; text-shadow: 0 0 10px #bf00ff; }
+.neon-pink { color: #ff00ea; text-shadow: 0 0 20px #ff00ea; }
+
+/* Button */
 button {
-  background: #ff0044;
+  background: linear-gradient(90deg, #ff0044, #ff00ea);
   border: none;
   color: white;
   font-size: 1.5rem;
   padding: 15px 40px;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
-  box-shadow: 0 0 20px #ff0044, inset 0 0 10px #ff0044;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 25px #ff00ea55;
 }
 button:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 25px #ff0044, 0 0 60px #ff00aa;
+  box-shadow: 0 0 40px #ff00ea;
 }
 
-.glass {
+/* Pulse glow animation */
+.pulse {
+  animation: pulseGlow 2.5s infinite;
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 25px #ff00ea55; }
+  50% { box-shadow: 0 0 60px #ff00ea; }
+}
+
+/* Fact Box */
+.fact-box {
   margin-top: 40px;
   padding: 25px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
 }
 
 .meme {
@@ -60,22 +104,12 @@ button:hover {
   border-radius: 10px;
   display: none;
   box-shadow: 0 0 20px #00f0ff;
+  transition: all 0.3s ease;
 }
 
-.orb {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,255,255,0.4), rgba(255,0,255,0));
-  animation: float 6s ease-in-out infinite;
-  filter: blur(40px);
-}
-.orb:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
-.orb:nth-child(2) { bottom: 20%; right: 15%; animation-delay: 2s; }
-.orb:nth-child(3) { top: 50%; left: 70%; animation-delay: 4s; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-30px); }
+/* Responsive */
+@media (max-width: 600px) {
+  h1 { font-size: 2rem; }
+  button { font-size: 1.2rem; padding: 12px 25px; }
+  .meme { width: 200px; }
 }
