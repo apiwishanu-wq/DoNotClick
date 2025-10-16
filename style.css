@@ -36,11 +36,23 @@ body {
 
 /* Center section */
 .center {
-  position: relative;
+  position: fixed;
+  inset: 0;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  top: 35vh;
+  gap: 1rem;
+  padding: 1rem;
 }
+@media (max-height: 600px) {
+  .center h1 { font-size: 2em; }
+  .center p { font-size: 1em; }
+  .neon-btn { padding: 10px 25px; font-size: 1em; }
+}
+
 
 h1 {
   font-size: 2.5em;
