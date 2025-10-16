@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Do Not Click – Neon Science Prank</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚨 DO NOT CLICK</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
 
-<!-- Floating orbs -->
-<div id="orbsContainer"></div>
+  <div class="container">
+    <h1>🚨 DO NOT CLICK</h1>
+    <p class="warning">Seriously, the big red button below is forbidden.<br>
+    But curiosity is a science tool…</p>
 
-<!-- Start button -->
-<div style="text-align:center;margin-top:3rem;">
-  <button id="startBtn">Do NOT Click</button>
-</div>
+    <button id="doNotClick">Do NOT Click</button>
 
-<!-- Modal -->
-<div id="modal">
-  <h1>Science Facts Incoming!</h1>
-  <div id="factText"></div>
-  <div id="embedWrap"></div>
-  <div id="fallback">
-    <img src="https://media.giphy.com/media/Vuw9m5wXviFIQ/giphy.gif" alt="rickroll preview">
+    <div id="factBox" class="glass">
+      <h2>💡 Science Fact</h2>
+      <p id="scienceFact">Press the button… if you dare.</p>
+      <img id="sciMeme" src="" alt="" class="meme">
+    </div>
   </div>
-</div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
