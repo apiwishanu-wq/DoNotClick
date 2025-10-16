@@ -72,7 +72,7 @@ btn.addEventListener('click', () => {
 
 function startFacts() {
   showNextFact(); // show first fact immediately
-  factInterval = setInterval(showNextFact, 3000); // every 3 sec
+  factInterval = setInterval(showNextFact, 3000); // facts every 3 sec
 }
 
 function showNextFact() {
@@ -87,7 +87,7 @@ function showNextFact() {
         img.src = memeImages[num];
         img.alt = `Science Meme ${num / 10}`;
         memeBox.appendChild(img);
-      }, 5000); // meme shows 5 sec after fact
+      }, 5000); // meme appears 5 sec after fact
     }
 
     factIndex++;
